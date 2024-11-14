@@ -131,6 +131,9 @@ namespace StargateAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("MethodName")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("Success")
                         .HasColumnType("BIT");
 

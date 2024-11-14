@@ -93,6 +93,7 @@ namespace StargateAPI.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    MethodName = table.Column<string>(type: "TEXT", nullable: false),
                     Success = table.Column<bool>(type: "BIT", nullable: false),
                     Message = table.Column<string>(type: "TEXT", nullable: false),
                     ResponseCode = table.Column<int>(type: "INTEGER", nullable: false),
