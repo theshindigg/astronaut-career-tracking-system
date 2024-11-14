@@ -14,15 +14,18 @@ namespace StargateAPI.Business.Commands
     public class CreatePersonPreProcessor : IRequestPreProcessor<CreatePerson>
     {
         private readonly StargateContext _context;
+
         public CreatePersonPreProcessor(StargateContext context)
         {
             _context = context;
         }
+
         public Task Process(CreatePerson request, CancellationToken cancellationToken)
         {
             var person = _context.People.AsNoTracking().FirstOrDefault(z => z.Name == request.Name);
 
-            if (person is not null) throw new BadHttpRequestException("Bad Request");
+            // FIXED: Made exception message clearer
+            if (person is not null) throw new BadHttpRequestException($"There is already a record for a Person with the name '{request.Name}'");
 
             return Task.CompletedTask;
         }
@@ -36,6 +39,7 @@ namespace StargateAPI.Business.Commands
         {
             _context = context;
         }
+
         public async Task<CreatePersonResult> Handle(CreatePerson request, CancellationToken cancellationToken)
         {
 

@@ -52,6 +52,7 @@ namespace StargateAPI.Business.Commands
         {
             _context = context;
         }
+
         public async Task<CreateAstronautDutyResult> Handle(CreateAstronautDuty request, CancellationToken cancellationToken)
         {
 
