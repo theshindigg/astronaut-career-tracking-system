@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uhjJRc+WwLY=",
+  "dgSpecHash": "YfLP9EQzpew=",
   "success": true,
-  "projectFilePath": "C:\\Programming\\csharp\\tech_exercise\\package\\exercise1\\api\\StargateAPI.csproj",
+  "projectFilePath": "C:\\Programming\\github\\theshindigg\\astronaut-career-tracking-system\\exercise1\\api\\StargateAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pehag\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
     "C:\\Users\\pehag\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
