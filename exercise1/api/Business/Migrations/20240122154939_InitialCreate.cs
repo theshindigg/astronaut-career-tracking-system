@@ -71,6 +71,12 @@ namespace StargateAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Person_Name",
+                table: "Person",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AstronautDetail_PersonId",
                 table: "AstronautDetail",
                 column: "PersonId",
@@ -80,6 +86,22 @@ namespace StargateAPI.Migrations
                 name: "IX_AstronautDuty_PersonId",
                 table: "AstronautDuty",
                 column: "PersonId");
+
+            migrationBuilder.CreateTable(
+                name: "AuditLog",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Success = table.Column<bool>(type: "BIT", nullable: false),
+                    Message = table.Column<string>(type: "TEXT", nullable: false),
+                    ResponseCode = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AuditLog", x => x.Id);
+                });
         }
 
         /// <inheritdoc />

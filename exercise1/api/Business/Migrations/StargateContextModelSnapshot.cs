@@ -90,6 +90,9 @@ namespace StargateAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Person");
                 });
 
@@ -120,6 +123,25 @@ namespace StargateAPI.Migrations
                     b.Navigation("AstronautDetail");
 
                     b.Navigation("AstronautDuties");
+                });
+
+            modelBuilder.Entity("StargateAPI.Business.Data.AuditLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Success")
+                        .HasColumnType("BIT");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ResponseCode")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("DATETIME");
                 });
 #pragma warning restore 612, 618
         }
