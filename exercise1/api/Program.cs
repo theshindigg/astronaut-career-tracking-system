@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using StargateAPI.Business.Commands;
 using StargateAPI.Business.Data;
+using StargateAPI.Business.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,9 @@ builder.Services.AddDbContext<StargateContext>(options =>
 
 builder.Services.AddMediatR(cfg =>
 {
+    cfg.AddRequestPreProcessor<CreatePersonPreProcessor>();
     cfg.AddRequestPreProcessor<CreateAstronautDutyPreProcessor>();
+    cfg.AddRequestPreProcessor<GetPersonByNamePreProcessor>();
     cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly);
 });
 

@@ -1,5 +1,9 @@
 
 *.exe
-*/obj/*
-*/bin/*
+obj/**
+bin/**
 
+exercise1/api/StargateAPI.csproj.user
+*.dll
+*.exe
+*.pdb
