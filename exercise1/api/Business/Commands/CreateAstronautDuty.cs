@@ -30,9 +30,11 @@ namespace StargateAPI.Business.Commands
 
         public Task Process(CreateAstronautDuty request, CancellationToken cancellationToken)
         {
+            // ENFORCE: An AstronautDuty requres a PersonId, so make sure a Person exists with the given name.
             var person = _context.People.AsNoTracking().FirstOrDefault(z => z.Name == request.Name);
 
-            if (person is null) throw new BadHttpRequestException("Bad Request");
+            // FIXED: Made exception message clearer
+            if (person is null) throw new BadHttpRequestException($"No record exists for a Person with the name {request.Name}");
 
             var verifyNoPreviousDuty = _context.AstronautDuties.FirstOrDefault(z => z.DutyTitle == request.DutyTitle && z.DutyStartDate == request.DutyStartDate);
 
