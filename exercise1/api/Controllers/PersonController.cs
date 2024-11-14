@@ -27,16 +27,34 @@ namespace StargateAPI.Controllers
 
                 });
 
+                await _mediator.Send(new CreateAuditLog()
+                {
+                    Success = result.Success,
+                    Message = result.Message,
+                    ResponseCode = result.ResponseCode,
+                    MethodName = nameof(GetPeople)
+                });
+
                 return this.GetResponse(result);
             }
             catch (Exception ex)
             {
-                return this.GetResponse(new BaseResponse()
+                var response = this.GetResponse(new BaseResponse()
                 {
                     Message = ex.Message,
                     Success = false,
                     ResponseCode = (int)HttpStatusCode.InternalServerError
                 });
+
+                await _mediator.Send(new CreateAuditLog()
+                {
+                    Success = false,
+                    Message = ex.Message,
+                    ResponseCode = (int)HttpStatusCode.InternalServerError,
+                    MethodName = nameof(GetPeople)
+                });
+
+                return response;
             }
         }
 
@@ -50,16 +68,36 @@ namespace StargateAPI.Controllers
                     Name = name
                 });
 
-                return this.GetResponse(result);
+                var response = this.GetResponse(result);
+
+                await _mediator.Send(new CreateAuditLog()
+                {
+                    Success = result.Success,
+                    Message = result.Message,
+                    ResponseCode = result.ResponseCode,
+                    MethodName = nameof(GetPersonByName)
+                });
+
+                return response;
             }
             catch (Exception ex)
             {
-                return this.GetResponse(new BaseResponse()
+                var response = this.GetResponse(new BaseResponse()
                 {
                     Message = ex.Message,
                     Success = false,
                     ResponseCode = (int)HttpStatusCode.InternalServerError
                 });
+
+                await _mediator.Send(new CreateAuditLog()
+                {
+                    Success = false,
+                    Message = ex.Message,
+                    ResponseCode = (int)HttpStatusCode.InternalServerError,
+                    MethodName = nameof(GetPersonByName)
+                });
+
+                return response;
             }
         }
 
@@ -73,16 +111,36 @@ namespace StargateAPI.Controllers
                     Name = name
                 });
 
-                return this.GetResponse(result);
+                var response = this.GetResponse(result);
+
+                await _mediator.Send(new CreateAuditLog()
+                {
+                    Success = result.Success,
+                    Message = result.Message,
+                    ResponseCode = result.ResponseCode,
+                    MethodName = nameof(CreatePerson)
+                });
+
+                return response;
             }
             catch (Exception ex)
             {
-                return this.GetResponse(new BaseResponse()
+                var response = this.GetResponse(new BaseResponse()
                 {
                     Message = ex.Message,
                     Success = false,
                     ResponseCode = (int)HttpStatusCode.InternalServerError
                 });
+
+                await _mediator.Send(new CreateAuditLog()
+                {
+                    Success = false,
+                    Message = ex.Message,
+                    ResponseCode = (int)HttpStatusCode.InternalServerError,
+                    MethodName = nameof(CreatePerson)
+                });
+
+                return response;
             }
 
         }

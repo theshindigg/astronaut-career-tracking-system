@@ -14,18 +14,20 @@ namespace StargateAPI.Business.Queries
         public required string Name { get; set; } = string.Empty;
     }
 
-    public class GetPersonByNamePreProcessor : IRequestPreProcessor<CreatePerson>
+    public class GetPersonByNamePreProcessor : IRequestPreProcessor<GetPersonByName>
     {
         private readonly StargateContext _context;
+
         public GetPersonByNamePreProcessor(StargateContext context)
         {
             _context = context;
         }
-        public Task Process(CreatePerson request, CancellationToken cancellationToken)
+
+        public Task Process(GetPersonByName request, CancellationToken cancellationToken)
         {
             var person = _context.People.AsNoTracking().FirstOrDefault(z => z.Name == request.Name);
 
-            if (person is null) throw new BadHttpRequestException($"No record exists for a Person with the name {request.Name}");
+            if (person is null) throw new BadHttpRequestException($"No record exists for a Person with the name '{request.Name}'");
 
             return Task.CompletedTask;
         }
